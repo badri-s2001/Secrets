@@ -56,7 +56,8 @@ passport.serializeUser(function(user, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "/auth/google/secrets"
+    callbackURL: "/auth/google/secrets",
+    proxy: true
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({ username: profile.id, password: profile.id }, function (err, user) {
@@ -68,7 +69,8 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
     clientID: process.env.APP_ID,
     clientSecret: process.env.APP_SECRET,
-    callbackURL: "/auth/facebook/secrets"
+    callbackURL: "/auth/facebook/secrets",
+    proxy: true
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({username: profile.id, password: profile.id }, function (err, user) {
